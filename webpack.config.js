@@ -31,6 +31,9 @@ module.exports = {
     devMiddleware: {
       writeToDisk: true,
     },
+    client: {
+      overlay: false
+    }
   },
   module: {
     rules: [
