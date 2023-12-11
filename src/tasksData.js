@@ -3,7 +3,9 @@ const originalPrompt = window.prompt
 const originalAlert = window.alert`
 
 const codeTryCatchPart = `try {
-  /* code */
+  (function() {
+    /* code */
+  })();
 }
 catch(err) {
   if (err.message === 'reask') {
@@ -62,6 +64,10 @@ export default [{
     {
       value: '7.123',
       expectedResult: notPrime
+    },
+    {
+      value: '  7fd74gs63jn      ',
+      expectedResult: errorMessage
     },
     {
       value: ' 2   ',
@@ -162,7 +168,15 @@ export default [{
       expectedResult: can
     },
     {
+      value: ' 9   ',
+      expectedResult: can
+    },
+    {
       value: ' 036 ',
+      expectedResult: cannot
+    },
+    {
+      value: ' 36 ',
       expectedResult: cannot
     },
     {
