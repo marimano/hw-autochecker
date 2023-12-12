@@ -1,0 +1,129 @@
+/*!**************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/styles.scss ***!
+  \**************************************************************************************************************************************/
+@charset "UTF-8";
+.pa10 {
+  padding: 10px;
+}
+
+.ba-black {
+  border: 1px solid black;
+}
+
+html {
+  font-family: sans-serif;
+}
+
+.hw {
+  display: flex;
+}
+.hw h3, .hw p, .hw pre {
+  margin: 0;
+  max-width: 680px;
+}
+.hw-list {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  max-width: 250px;
+  border-right: 1px solid grey;
+}
+.hw-list-item {
+  padding: 5px 20px;
+  width: 200px;
+}
+.hw-list-item.active {
+  box-shadow: 1px 1px 3px 0px grey;
+}
+.hw-item {
+  padding: 20px;
+}
+.hw-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  flex-grow: 1;
+}
+.hw-details textarea {
+  resize: vertical;
+  width: 100%;
+  min-height: 100px;
+}
+.hw-details .hw-results-table, .hw-details .hw-results td, .hw-details .hw-results th {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 10px 30px;
+}
+.hw-details .hw-results-error {
+  color: red;
+}
+.hw-details .hw-results .yes-no {
+  font-weight: bold;
+}
+.hw-details .hw-results .yes-no-cell {
+  text-align: center;
+}
+.hw-details .hw-results .yes-no::after {
+  content: "...";
+}
+.hw-details .hw-results .yes-no.yes::after {
+  content: "✓";
+  color: green;
+}
+.hw-details .hw-results .yes-no.no::after {
+  content: "❌";
+  color: red;
+}
+.hw-details .hw-results .yes-no.maybe::after {
+  content: "✓ +-";
+  color: green;
+}
+/*!******************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./src/components/commentGenerator.styles.scss ***!
+  \******************************************************************************************************************************************************************/
+.comment-generator {
+  display: flex;
+  gap: 50px;
+}
+.comment-generator h2 {
+  font-size: 30px;
+}
+.comment-generator textarea {
+  resize: vertical;
+  min-height: 400px;
+  width: 600px;
+  border-radius: 5px;
+  padding: 7px 15px;
+}
+.comment-generator .results textarea {
+  min-height: 50px;
+  height: 50px;
+}
+.comment-generator button {
+  padding: 7px 15px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.comment-generator input[type=number] {
+  width: 45px;
+  font-size: inherit;
+}
+.comment-generator .criteria {
+  margin-bottom: 15px;
+}
+.comment-generator .criteria-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 5px 0;
+}
+.comment-generator .results-text {
+  padding-top: 20px;
+}
