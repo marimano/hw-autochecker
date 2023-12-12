@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import tasksData from './tasksData'
 import ResultComponent from './components/ResultComponent'
+import CommentGenerator from './components/CommentGenerator'
 
 export default () => {
   const [selectedTaskId, setSelectedTaskId] = useState()
@@ -29,12 +30,16 @@ export default () => {
         </button>
       })}
     </div>
-    {selectedTask && <div className='hw-details'>
-      <h3>{selectedTask.title}</h3>
-      <div>{selectedTask.description.map(d => <p key={d}>{d}</p>)}</div>
-      <textarea value={codeToTest} onChange={onCodeToTestChange}/>
-      <button disabled={!codeToTest.trim() || isRun} onClick={() => setIsRun(true)}>Run checker</button>
-      <ResultComponent selectedTask={selectedTask} codeToTest={codeToTest} isRun={isRun}/>
-    </div>}
+    <div className='hw-item'>
+      {selectedTask && <div className='hw-details'>
+        <h3>{selectedTask.title}</h3>
+        <div>{selectedTask.description.map(d => <p key={d}>{d}</p>)}</div>
+        <textarea value={codeToTest} onChange={onCodeToTestChange}/>
+        <button disabled={!codeToTest.trim() || isRun} onClick={() => setIsRun(true)}>Run checker</button>
+        <ResultComponent selectedTask={selectedTask} codeToTest={codeToTest} isRun={isRun}/>
+      </div>}
+      
+      <CommentGenerator/>
+    </div>
   </div>
 }

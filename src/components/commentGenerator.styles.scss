@@ -1,0 +1,50 @@
+.comment-generator {
+  display: flex;
+  gap: 50px;
+
+  h3 {
+    margin-bottom: 20px;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 400px;
+    width: 600px;
+    border-radius: 5px;
+    padding: 7px 15px;
+  }
+  
+  .results textarea {
+    min-height: 50px;
+    height: 50px;
+  }
+  
+  button {
+    padding: 7px 15px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  input[type="number"] {
+    width: 45px;
+    font-size: inherit;
+  }
+  
+  .criteria {
+    margin-bottom: 15px;
+    &-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 5px 0;
+    }
+  }
+
+  .results-text {
+    padding-top: 20px;
+    white-space: pre-line;
+  }
+}
