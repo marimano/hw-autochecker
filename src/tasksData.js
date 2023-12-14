@@ -2,7 +2,21 @@ const codeInitPart = `const result = []
 const originalPrompt = window.prompt
 const originalAlert = window.alert`
 
-const codeTryCatchPart = `try {
+const codeSetupAndTryCatchPart = `result[j] = [inputs[j]]
+window.prompt = (function() {
+  let asked = false
+  return () => {
+    if (asked) {
+      throw new Error('reask')
+    }
+
+    asked = true
+    return inputs[j].value
+  }
+})()
+window.alert = msg => result[j].push(msg.toString())
+
+try {
   (function() {
     /* code */
   })();
@@ -96,21 +110,7 @@ export default [{
     ${codeInitPart}
 
     for(let j = 0; j < inputs.length; j++) {
-      result[j] = [inputs[j]]
-      window.prompt = (function() {
-        let asked = false
-        return () => {
-          if (asked) {
-            throw new Error('reask')
-          }
-
-          asked = true
-          return inputs[j].value
-        }
-      })()
-      window.alert = msg => result[j].push(msg.toString())
-
-      ${codeTryCatchPart}
+      ${codeSetupAndTryCatchPart}
     }
     ${codeRestoreAndSendPart}
   `
@@ -190,21 +190,75 @@ export default [{
     ${codeInitPart}
 
     for(let j = 0; j < inputs.length; j++) {
-      result[j] = [inputs[j]]
-      window.prompt = (function() {
-        let asked = false
-        return () => {
-          if (asked) {
-            throw new Error('reask')
-          }
+      ${codeSetupAndTryCatchPart}
+    }
+    ${codeRestoreAndSendPart}
+  `
+},
+{
+  id: 'sum-of-list',
+  title: 'Sum of number list',
+  description: [
+    'Create an array of numbers, the elements of which are specified by the user. Display the sum of these numbers.',
+    'Base it on the lesson task where the user enters all elements in a single line.',
+    '"Cancel" should terminate the program, and an empty string should not be treated as 0.'
+  ],
+  code: `
+    const errorMessage = 'Error message'
+    const sumIs = 'sum is '
 
-          asked = true
-          return inputs[j].value
-        }
-      })()
-      window.alert = msg => result[j].push(msg.toString())
+    const inputs = [{
+      value: null,
+      expectedResult: 'Nothing or a message about canceling'
+    },
+    {
+      value: '',
+      expectedResult: errorMessage
+    },
+    {
+      value: '        ',
+      expectedResult: errorMessage
+    },
+    {
+      value: '  9fd74gs63jn      ',
+      expectedResult: errorMessage
+    },
+    {
+      value: '    0     ',
+      expectedResult: sumIs + 0
+    },
+    {
+      value: '-27,,10',
+      expectedResult: errorMessage
+    },
+    {
+      value: '-9.123,10',
+      expectedResult: sumIs + '0.877'
+    },
+    {
+      value: '    1,   ,',
+      expectedResult: errorMessage
+    },
+    {
+      value: '9.123abc,10',
+      expectedResult: errorMessage
+    },
+    {
+      value: ' 009   ,1.2',
+      expectedResult: sumIs + 10.2
+    },
+    {
+      value: ' 9,   ,1',
+      expectedResult: errorMessage
+    },
+    {
+      value: ' 2, 3  ,5',
+      expectedResult: sumIs + 10
+    }]
+    ${codeInitPart}
 
-      ${codeTryCatchPart}
+    for(let j = 0; j < inputs.length; j++) {
+      ${codeSetupAndTryCatchPart}
     }
     ${codeRestoreAndSendPart}
   `
