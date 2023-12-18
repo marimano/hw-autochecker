@@ -254,6 +254,10 @@ export default [{
     {
       value: ' 2, 3  ,5',
       expectedResult: sumIs + 10
+    },
+    {
+      value: ' 9,   ',
+      expectedResult: errorMessage
     }]
     ${codeInitPart}
 
