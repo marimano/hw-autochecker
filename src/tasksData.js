@@ -1,14 +1,16 @@
+const nullMessage = 'Nothing or a message about canceling'
 const errorMessage = 'Error message'
 const notPrime = 'number is not prime'
 const prime = 'number is prime'
 const isNot3inN = 'number is not 3^n'
 const is3inN = 'number is 3^n'
 const sumIs = 'sum is '
+const xInNIs = 'x^n is '
 
 const valuesToCheckMap = {
   primeNum: [{
     value: null,
-    expectedResult: 'Nothing or a message about canceling'
+    expectedResult: nullMessage
   },
   {
     value: '',
@@ -68,7 +70,7 @@ const valuesToCheckMap = {
   }],
   degreeOf3: [{
     value: null,
-    expectedResult: 'Nothing or a message about canceling'
+    expectedResult: nullMessage
   },
   {
     value: '',
@@ -128,7 +130,7 @@ const valuesToCheckMap = {
   }],
   sumOfList: [{
     value: null,
-    expectedResult: 'Nothing or a message about canceling'
+    expectedResult: nullMessage
   },
   {
     value: '',
@@ -177,6 +179,62 @@ const valuesToCheckMap = {
   {
     value: ' 9,   ',
     expectedResult: errorMessage
+  }],
+  pow: [{
+    value: [null, null],
+    expectedResult: nullMessage
+  },
+  {
+    value: ['   ', null],
+    expectedResult: errorMessage
+  },
+  {
+    value: ['        ', '  '],
+    expectedResult: errorMessage
+  },
+  {
+    value: ['  9fd74gs63jn      ', null],
+    expectedResult: errorMessage
+  },
+  {
+    value: ['    0     ', '0'],
+    expectedResult: xInNIs + 1
+  },
+  {
+    value: ['    0     ', null],
+    expectedResult: errorMessage
+  },
+  {
+    value: ['-3', '      '],
+    expectedResult: errorMessage
+  },
+  {
+    value: ['-3', '2'],
+    expectedResult: xInNIs + '9'
+  },
+  {
+    value: ['   3.2  ', '  2 '],
+    expectedResult: xInNIs + '10.24'
+  },
+  {
+    value: ['   3.2  ', '  2.2 '],
+    expectedResult: errorMessage
+  },
+  {
+    value: [' 009   ', '   1   '],
+    expectedResult: xInNIs + 9
+  },
+  {
+    value: [' 91 ', '  0 '],
+    expectedResult: xInNIs + 1
+  },
+  {
+    value: [' 2 ', '-02 '],
+    expectedResult: xInNIs + '0.25'
+  },
+  {
+    value: [' 0   ', '5'],
+    expectedResult: xInNIs + 0
   }]
 }
 
@@ -189,13 +247,15 @@ for(let j = 0; j < inputs.length; j++) {
   result[j] = [inputs[j]]
   window.prompt = (function() {
     let asked = false
+    let i = 0
+    const total = inputs[j].value?.length || 1
     return () => {
-      if (asked) {
+      if (total <= i) {
         throw new Error('reask')
       }
 
-      asked = true
-      return inputs[j].value
+      i++
+      return Array.isArray(inputs[j].value) ? inputs[j].value[i-1] : inputs[j].value
     }
   })()
   window.alert = msg => result[j].push(msg.toString())
@@ -250,5 +310,17 @@ export default [{
     '"Cancel" should terminate the program, and an empty string should not be treated as 0.'
   ],
   code: generateCode(valuesToCheckMap.sumOfList)
+},
+{
+  id: 'pow',
+  title: 'x^n recursively',
+  description: [
+    'Implement a recursive function that exponentiates a number:',
+    '- the number to be raised to the power is passed as the first argument to the function;',
+    '- The degree is passed as the second argument to the pow(num, degree) function.',
+    'The number and the degree is entered by user',
+    'For negative powers, it should calculate (x^n = 1/x^(-n) ), for non-integer powers, it should write an error'
+  ],
+  code: generateCode(valuesToCheckMap.pow)
 }]
 
