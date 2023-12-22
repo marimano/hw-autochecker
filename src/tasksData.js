@@ -179,6 +179,14 @@ const valuesToCheckMap = {
   {
     value: ' 9,   ',
     expectedResult: errorMessage
+  },
+  {
+    value: ' 9rdf, 4,3.222,6,1fwf,3',
+    expectedResult: errorMessage
+  },
+  {
+    value: ' 2, 3  ,5,20.5,5',
+    expectedResult: sumIs + 35.5
   }],
   pow: [{
     value: [null, null],
@@ -248,7 +256,7 @@ for(let j = 0; j < inputs.length; j++) {
   window.prompt = (function() {
     let asked = false
     let i = 0
-    const total = inputs[j].value?.length || 1
+    const total = Array.isArray(inputs[j].value) ? inputs[j].value.length : 1
     return () => {
       if (total <= i) {
         throw new Error('reask')
@@ -258,7 +266,7 @@ for(let j = 0; j < inputs.length; j++) {
       return Array.isArray(inputs[j].value) ? inputs[j].value[i-1] : inputs[j].value
     }
   })()
-  window.alert = msg => result[j].push(msg.toString())
+  window.alert = msg => result[j].push(String(msg))
 
   try {
     (function() {
