@@ -205,6 +205,14 @@ const valuesToCheckMap = {
     expectedResult: errorMessage
   },
   {
+    value: ['  9fd74gs63jn      ', '2hjk'],
+    expectedResult: errorMessage
+  },
+  {
+    value: ['  9fd74gs63jn      ', '2'],
+    expectedResult: errorMessage
+  },
+  {
     value: ['    0     ', '0'],
     expectedResult: xInNIs + 1
   },
